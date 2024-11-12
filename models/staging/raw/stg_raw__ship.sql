@@ -1,19 +1,23 @@
 with 
 
 source as (
-    
-    select * 
+
+    select 
+        orders_id,
+        shipping_fee,
+        shipping_fee_1,
+        ship_cost
     from {{ source('raw', 'ship') }}
 ),
 
 cleaned_ship as (
-
+    
     select
-        order_id,
+        orders_id,
         shipping_fee,  
-        CAST(ship_cost AS FLOAT64) AS ship_cost 
+        CAST(ship_cost AS FLOAT64) AS ship_cost  
     from source
-    where shipping_fee = shipping_fee_1 
+    where shipping_fee = shipping_fee_1  
 )
 
 select * 

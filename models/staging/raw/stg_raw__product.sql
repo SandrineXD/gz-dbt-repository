@@ -1,16 +1,20 @@
 with 
 
 source as (
-    select * 
+    
+    select 
+        products_id,         
+        purchSE_PRICE        
     from {{ source('raw', 'product') }}
 ),
 
 cleaned_product as (
+   
     select
-        product_id,
-        product_name,
-        CAST(purchse_price AS FLOAT64) AS purchase_price
+        products_id,  
+        CAST(purchSE_PRICE AS FLOAT64) AS purchase_price  
     from source
 )
+
 select * 
 from cleaned_product
